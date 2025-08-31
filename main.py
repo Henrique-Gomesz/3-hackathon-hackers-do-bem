@@ -12,10 +12,10 @@ weights = {
     "date_norm": 1
 }
 
-# summary = batch_score_and_update(
-#     collection=vulnerabilities_collection,
-#     weights=weights
-# )
+summary = batch_score_and_update(
+    collection=vulnerabilities_collection,
+    weights=weights
+)
 
 # print(json.dumps(summary, ensure_ascii=False, indent=2))
 
@@ -31,7 +31,15 @@ selected_payload = {
     "thresholds_raw": res.get("thresholds_raw"),
     "selected": res.get("selected", [])
 }
-print (selected_payload)
 
 
+def process_scores( weights=None):
+    if weights is None:
+        weights = {
+            "cve": 1,
+            "epss": 2,
+            "companyCriticality": 1,
+            "date_norm": 1
+        }
+    return batch_score_and_update(collection=vulnerabilities_collection, weights=weights)
 
