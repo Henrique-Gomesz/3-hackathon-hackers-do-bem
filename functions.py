@@ -137,3 +137,30 @@ def get_vulnerabilities_filtered(
             out.append(d)
         docs = out
     return docs
+
+
+# New function: get_all_vulnerabilities_paginated
+from typing import Optional, Dict, Any, List
+def get_all_vulnerabilities_paginated(
+    page: int = 1,
+    page_size: int = 20,
+    projection: Optional[Dict[str, int]] = None,
+) -> List[Dict[str, Any]]:
+    skip = (page - 1) * page_size
+    proj = projection or {
+        "_id": 1,
+        "name": 1,
+        "date": 1,
+        "cve_id": 1,
+        "cvss": 1,
+        "cve": 1,
+        "epss": 1,
+        "companyCriticality": 1,
+        "base_score": 1,
+        "priority_class": 1,
+        "environments": 1,
+        "tags": 1,
+    }
+    cur = vulnerabilities_collection.find({}, proj).sort("base_score", -1).skip(skip).limit(page_size)
+    docs = list(cur)
+    return docs
