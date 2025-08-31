@@ -2,6 +2,6 @@ from map_model_1_to_vulnerability import map_model_1_to_vulnerability
 from map_model_2_to_vulnerability import map_model_2_to_vulnerability
 from enchance_data import enchance_data
 
-map_model_1_to_vulnerability()
-map_model_2_to_vulnerability()
+#map_model_1_to_vulnerability()
+#map_model_2_to_vulnerability()
 enchance_data()

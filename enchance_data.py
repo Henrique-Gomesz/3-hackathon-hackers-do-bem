@@ -12,7 +12,7 @@ def enchance_data():
             cve_data = get_cve(cve_id)
             epss_data = get_epss(cve_id)
             print(f"Processing {index}/{total_cves}: {cve_id}")
-            sleep(2)
+            sleep(1)
             vulnerabilities_collection.update_many(
                 {"cve_id": cve_id},
                 {"$set": {
