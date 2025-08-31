@@ -8,11 +8,16 @@ class EPSSItem(TypedDict):
     percentile: str
     date: str
 
-
 def get_epss(cve_id: str) -> Optional[EPSSItem]:
-    response = requests.get(f"https://api.first.org/data/v1/epss?cve={cve_id}")
-    response.raise_for_status()
-    data = response.json().get("data", [])
-    if not data:
+    try:
+        print("Fetching EPSS data for CVE:", cve_id)
+        response = requests.get(f"https://api.first.org/data/v1/epss?cve={cve_id}")
+        response.raise_for_status()
+        data = response.json().get("data", [])
+        if not data:
+            return None
+        
+        return data[0]
+    except requests.RequestException as e:
+        print(f"An error occurred while fetching EPSS data: {e}")
         return None
-    return data[0]

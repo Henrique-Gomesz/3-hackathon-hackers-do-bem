@@ -1,7 +1,7 @@
-from get_epss import get_epss
-from get_cve import get_cve
+from map_model_1_to_vulnerability import map_model_1_to_vulnerability
+from map_model_2_to_vulnerability import map_model_2_to_vulnerability
+from enchance_data import enchance_data
 
-cve_id = "CVE-2021-34527"
-cve_data = get_cve(cve_id)
-epss_data = get_epss(cve_id)
-
+map_model_1_to_vulnerability()
+map_model_2_to_vulnerability()
+enchance_data()
